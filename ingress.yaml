@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-ingress
+  namespace: docker-nginx 
+  labels:
+    app: django-blog
+
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: dot.com
+    http: 
+      paths: 
+        - path: /home
+          pathType: Prefix
+          backend:
+            service:
+              name: my-service
+              port:
+                number: 80
+                
